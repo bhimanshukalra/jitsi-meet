@@ -103,6 +103,7 @@ function MeetingParticipants({
     const askUnmuteText = t('participantsPane.actions.askUnmute');
     const muteParticipantButtonText = t('dialog.muteParticipantButton');
     const isBreakoutRoom = useSelector(isInBreakoutRoom);
+    const visitorsCount = useSelector((state: IReduxState) => state['features/visitors'].count);
 
     const { classes: styles } = useStyles();
 
@@ -112,6 +113,10 @@ function MeetingParticipants({
                 {currentRoom?.name
                     ? `${currentRoom.name} (${participantsCount})`
                     : t('participantsPane.headings.participantsList', { count: participantsCount })}
+            </div>
+            <div className = { styles.heading }>
+                {visitorsCount && visitorsCount > 0
+                    && t('participantsPane.headings.visitors', { count: visitorsCount })}
             </div>
             {showInviteButton && <InviteButton />}
             <Input
